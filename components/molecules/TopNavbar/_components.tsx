@@ -4,7 +4,7 @@ import { Colors } from "constant/Color";
 export const Wrapper = styled.div`
   width: 100vw;
   height: 2rem;
-  padding: 0 12vw;
+  padding: 0 10vw;
   display: flex;
   justify-content: end;
   align-items: center;
