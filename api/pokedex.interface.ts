@@ -8,6 +8,14 @@ export interface ResultPokemonProperties {
   url: string;
 }
 
+export interface TypeProperties {
+  slot: number;
+  type: {
+    name: string;
+    url: string;
+  };
+}
+
 export interface PokemonListProperties {
   count: number;
   next: string | null;
@@ -21,4 +29,5 @@ export interface PokemonDetail {
   sprites: {
     front_default: string;
   };
+  types: TypeProperties[];
 }

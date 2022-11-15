@@ -6,7 +6,7 @@ import { useDetailPokemon } from "api/pokedex.hooks";
 import Image from "next/image";
 
 const Text = dynamic(() => import("@mui/material/Typography"));
-const Tag = dynamic(() => import("@mui/material/Chip"));
+const Tag = dynamic(() => import("@components/atoms/Type"));
 
 interface CardPokedexProperties {
   data: ResultPokemonProperties;
@@ -15,7 +15,7 @@ interface CardPokedexProperties {
 const CardPokedex: React.FC<CardPokedexProperties> = ({ data }) => {
   const { name, url } = data;
   const { data: detailPokemon } = useDetailPokemon(name);
-  const { id, sprites } = detailPokemon || {};
+  const { id, sprites, types } = detailPokemon || {};
   return (
     <WrapperCard>
       <Cover>
@@ -49,10 +49,9 @@ const CardPokedex: React.FC<CardPokedexProperties> = ({ data }) => {
         {name}
       </Text>
       <div className="pokedex-type">
-        <Tag style={{ width: "45%" }} label="Type 1" />
-        <Tag style={{ width: "45%" }} label="Type 2" />
-        <Tag style={{ width: "45%" }} label="Type 3" />
-        <Tag style={{ width: "45%" }} label="Type 4" />
+        {types?.map((item) => (
+          <Tag value={item.type.name as string} key={`tag-${item.slot}`} />
+        ))}
       </div>
     </WrapperCard>
   );
