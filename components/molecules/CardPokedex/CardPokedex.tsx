@@ -13,7 +13,7 @@ interface CardPokedexProperties {
 const CardPokedex: React.FC<CardPokedexProperties> = ({ data }) => {
   const { name } = data;
   return (
-    <WrapperCard elevation={3}>
+    <WrapperCard>
       <Cover></Cover>
       <Text
         color={Colors.grey50}
