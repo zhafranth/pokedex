@@ -62,7 +62,7 @@ export const TypeOptions = [
   {
     id: 13,
     name: "electric",
-    color: "",
+    color: "#FFEB3B",
   },
   {
     id: 14,
