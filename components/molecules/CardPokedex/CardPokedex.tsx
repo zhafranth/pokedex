@@ -1,11 +1,17 @@
 import { Colors } from "@constant/Color";
 import dynamic from "next/dynamic";
 import { WrapperCard, Cover } from "./_components";
+import { ResultPokemonProperties } from "api/pokedex.interface";
 
 const Text = dynamic(() => import("@mui/material/Typography"));
 const Tag = dynamic(() => import("@mui/material/Chip"));
 
-const CardPokedex = () => {
+interface CardPokedexProperties {
+  data: ResultPokemonProperties;
+}
+
+const CardPokedex: React.FC<CardPokedexProperties> = ({ data }) => {
+  const { name } = data;
   return (
     <WrapperCard elevation={3}>
       <Cover></Cover>
@@ -24,8 +30,9 @@ const CardPokedex = () => {
         fontSize="2.5rem"
         fontWeight="700"
         fontFamily="inherit"
+        style={{ textTransform: "capitalize" }}
       >
-        Poke Name
+        {name}
       </Text>
       <div className="pokedex-type">
         <Tag style={{ width: "45%" }} label="Type 1" />
