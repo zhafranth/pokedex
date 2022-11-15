@@ -24,4 +24,7 @@ export const Cover = styled.div`
   height: 275px;
   background-color: #b3b6b8;
   overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
