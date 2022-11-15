@@ -3,12 +3,22 @@ import dynamic from "next/dynamic";
 import { ContentWrapper, PokedexWrapper } from "./_components";
 import Image from "next/image";
 import ImageContent from "assets/home-content.png";
+import { useRef } from "react";
 
 const Button = dynamic(() => import("components/atoms/Button"));
 const Container = dynamic(() => import("@mui/material/Container"));
 const Typography = dynamic(() => import("@mui/material/Typography"));
 
 const Home = () => {
+  const pokedexRef = useRef<HTMLDivElement>(null);
+
+  const gotToPokedex = () => {
+    window.scrollTo({
+      behavior: "smooth",
+      top: pokedexRef?.current?.offsetTop || 0 + 450,
+    });
+  };
+
   return (
     <>
       <Container>
@@ -32,12 +42,12 @@ const Home = () => {
             >
               Thousands of data compiled into one place
             </Typography>
-            <Button>Check PokèDex</Button>
+            <Button onClick={gotToPokedex}>Check PokèDex</Button>
           </div>
           <Image src={ImageContent} alt="pokemon group" />
         </ContentWrapper>
       </Container>
-      <PokedexWrapper>
+      <PokedexWrapper ref={pokedexRef}>
         <Container>
           <Typography
             variant="h4"
