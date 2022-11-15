@@ -6,6 +6,7 @@ import { useDetailPokemon } from "api/pokedex.hooks";
 import Image from "next/image";
 
 const Text = dynamic(() => import("@mui/material/Typography"));
+const Skeleton = dynamic(() => import("@mui/material/Skeleton"));
 const Tag = dynamic(() => import("@components/atoms/Type"));
 
 interface CardPokedexProperties {
@@ -13,9 +14,20 @@ interface CardPokedexProperties {
 }
 
 const CardPokedex: React.FC<CardPokedexProperties> = ({ data }) => {
-  const { name, url } = data;
-  const { data: detailPokemon } = useDetailPokemon(name);
+  const { name } = data;
+  const { data: detailPokemon, isLoading } = useDetailPokemon(name);
   const { id, sprites, types } = detailPokemon || {};
+
+  if (isLoading) {
+    return (
+      <Skeleton
+        variant="rounded"
+        width="20rem"
+        height="482px"
+        style={{ margin: "auto" }}
+      />
+    );
+  }
   return (
     <WrapperCard>
       <Cover>
