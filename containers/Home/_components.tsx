@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-export const Wrapper = styled.div`
+export const ContentWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
