@@ -1,6 +1,6 @@
 import { Colors } from "@constant/Color";
 import dynamic from "next/dynamic";
-import { ContentWrapper } from "./_components";
+import { ContentWrapper, PokedexWrapper } from "./_components";
 import Image from "next/image";
 import ImageContent from "assets/home-content.png";
 
@@ -13,7 +13,7 @@ const Home = () => {
     <>
       <Container>
         <ContentWrapper>
-          <div className="content">
+          <div>
             <Typography
               variant="h4"
               fontFamily={"inherit"}
@@ -37,6 +37,31 @@ const Home = () => {
           <Image src={ImageContent} alt="pokemon group" />
         </ContentWrapper>
       </Container>
+      <PokedexWrapper>
+        <Container>
+          <Typography
+            variant="h4"
+            textAlign="center"
+            fontFamily="inherit"
+            color={Colors.neutral}
+            fontWeight="700"
+            fontSize="2.5rem"
+            lineHeight="3.75rem"
+          >
+            PokèDex
+          </Typography>
+          <Typography
+            paragraph
+            textAlign="center"
+            fontFamily="inherit"
+            color={Colors.neutral}
+            fontSize="1.5rem"
+          >
+            All Generation totaling <br />
+            999999 Pokemon
+          </Typography>
+        </Container>
+      </PokedexWrapper>
     </>
   );
 };
