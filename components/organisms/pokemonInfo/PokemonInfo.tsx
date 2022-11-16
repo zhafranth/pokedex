@@ -82,7 +82,7 @@ const PokemonInfo: React.FC<PokemonInfoProperties> = ({ data, loading }) => {
               }
             />
           </Box>
-          {!router.query.id && (
+          {!router.query.name && (
             <Link
               onClick={() => router.push(`/${name}`)}
               style={{ position: "absolute", bottom: "0" }}
