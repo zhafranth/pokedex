@@ -13,6 +13,7 @@ const Modal = dynamic(() => import("@mui/material/Modal"));
 const Button = dynamic(() => import("@mui/material/Button"));
 const Box = dynamic(() => import("@mui/material/Box"));
 const Text = dynamic(() => import("@mui/material/Typography"));
+const TextField = dynamic(() => import("@components/atoms/TextField"));
 
 interface ModalDetailPokemonProperties extends Omit<ModalProps, "children"> {
   data: PokemonDetail;
@@ -57,44 +58,40 @@ const ModalDetailPokemon: React.FC<ModalDetailPokemonProperties> = (props) => {
             </Text>
             <Box>
               <Box display="flex" columnGap="2rem">
-                <Box display="flex" columnGap="0.7rem">
-                  <Text fontWeight="700" paragraph>
-                    Weight :{" "}
-                  </Text>
-                  <Text paragraph>{weight}</Text>
-                </Box>
-                <Box display="flex" columnGap="0.7rem">
-                  <Text fontWeight="700" paragraph>
-                    Height :{" "}
-                  </Text>
-                  <Text paragraph>{height}</Text>
-                </Box>
+                <TextField value={weight} label="Weight" />
+                <TextField value={height} label="Height" />
               </Box>
               <Box display="flex" columnGap="0.7rem">
-                <Text fontWeight="700" paragraph>
-                  Abilities :{" "}
-                </Text>
-                <ul style={{ margin: "0" }}>
-                  {abilities?.map((item, index) => (
-                    <li key={`${item.ability.name}-${index}`}>
-                      <Text paragraph textTransform="capitalize">
-                        {item.ability.name}
-                      </Text>
-                    </li>
-                  ))}
-                </ul>
+                <TextField
+                  label="Abilities"
+                  value={
+                    <ul style={{ margin: "0" }}>
+                      {abilities?.map((item, index) => (
+                        <li key={`${item.ability.name}-${index}`}>
+                          <Text paragraph textTransform="capitalize">
+                            {item.ability.name}
+                          </Text>
+                        </li>
+                      ))}
+                    </ul>
+                  }
+                />
               </Box>
               <Box display="flex" columnGap="0.7rem" flexWrap="wrap">
-                <Text fontWeight="700" paragraph>
-                  Type :{" "}
-                </Text>
-                {types?.map((item) => (
-                  <Type
-                    value={item.type.name}
-                    key={`${item.slot}-${item.type.name}`}
-                    width="auto"
-                  />
-                ))}
+                <TextField
+                  label="Type"
+                  value={
+                    <>
+                      {types?.map((item) => (
+                        <Type
+                          value={item.type.name}
+                          key={`${item.slot}-${item.type.name}`}
+                          width="auto"
+                        />
+                      ))}
+                    </>
+                  }
+                />
               </Box>
             </Box>
             <Link
