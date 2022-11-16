@@ -1,6 +1,5 @@
 import dynamic from "next/dynamic";
 import Image from "next/image";
-import { Colors } from "@constant/Color";
 import { PokemonDetail } from "api/pokedex.interface";
 import { useRouter } from "next/router";
 import { Cover } from "./_components";
@@ -17,7 +16,7 @@ interface PokemonInfoProperties {
 }
 
 const PokemonInfo: React.FC<PokemonInfoProperties> = ({ data, loading }) => {
-  const { abilities, height, id, name, sprites, types, weight } = data || {};
+  const { abilities, height, name, sprites, types, weight } = data || {};
   const router = useRouter();
 
   if (loading) {
@@ -85,7 +84,7 @@ const PokemonInfo: React.FC<PokemonInfoProperties> = ({ data, loading }) => {
           </Box>
           {!router.query.id && (
             <Link
-              onClick={() => router.push(`/${id}`)}
+              onClick={() => router.push(`/${name}`)}
               style={{ position: "absolute", bottom: "0" }}
             >
               More Detail

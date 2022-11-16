@@ -7,10 +7,11 @@ const PokemonInfo = dynamic(() => import("@components/organisms/pokemonInfo"));
 
 const PokemonDetail = () => {
   const router = useRouter();
-  const { id: queryId } = router.query;
+  const { name: queryName } = router.query;
   const { data: detailPokemon, isLoading } = useDetailPokemon(
-    queryId as string
+    queryName as string
   );
+
   const { abilities, height, name, sprites, types, weight } =
     detailPokemon || {};
   return (
