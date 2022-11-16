@@ -8,3 +8,12 @@ export const Colors = {
   red: "#F73B3B",
   purple: "#434DD0",
 };
+
+export const StatsColor = {
+  hp: "#4CAF50",
+  attack: "#F4511E",
+  defense: "#2196F3",
+  "special-attack": "#E53935",
+  "special-defense": "#512DA8",
+  speed: "#FDD835",
+};

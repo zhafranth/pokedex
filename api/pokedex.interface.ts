@@ -22,6 +22,20 @@ export interface AbilityProperties {
   slot: number;
 }
 
+type StatsType =
+  | "hp"
+  | "attack"
+  | "defense"
+  | "special-attack"
+  | "special-defense"
+  | "speed";
+
+export interface StatsProperties {
+  base_stat: number;
+  effort: 2;
+  stat: { name: StatsType; url: string };
+}
+
 export interface PokemonListProperties {
   count: number;
   next: string | null;
@@ -39,4 +53,5 @@ export interface PokemonDetail {
   weight: number;
   height: number;
   abilities: AbilityProperties[];
+  stats: StatsProperties[];
 }
