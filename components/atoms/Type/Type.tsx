@@ -8,21 +8,25 @@ const Chip = dynamic(() => import("@mui/material/Chip"));
 
 interface ChipWrapperProperties {
   bgColor: string;
+  width?: string;
 }
 
 interface TypeProperties {
   value: number | string;
+  width?: string;
 }
 
-const ChipWrapper = styled(Chip)<ChipWrapperProperties>(({ bgColor }) => ({
-  backgroundColor: bgColor,
-  width: "45%",
-  fontFamily: "inherit",
-  color: "#fff",
-  textTransform: "capitalize",
-}));
+const ChipWrapper = styled(Chip)<ChipWrapperProperties>(
+  ({ bgColor, width }) => ({
+    backgroundColor: bgColor,
+    width: width || "45%",
+    fontFamily: "inherit",
+    color: "#fff",
+    textTransform: "capitalize",
+  })
+);
 
-const Type: React.FC<TypeProperties> = ({ value }) => {
+const Type: React.FC<TypeProperties> = ({ value, width }) => {
   const selectedEnum = useMemo(
     () => TypeOptions.find((item) => item.name === value),
     [value]
@@ -32,6 +36,7 @@ const Type: React.FC<TypeProperties> = ({ value }) => {
     <ChipWrapper
       label={selectedEnum?.name}
       bgColor={selectedEnum?.color || Colors.grey}
+      width={width}
     />
   );
 };

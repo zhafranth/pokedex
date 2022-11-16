@@ -92,6 +92,7 @@ const ModalDetailPokemon: React.FC<ModalDetailPokemonProperties> = (props) => {
                   <Type
                     value={item.type.name}
                     key={`${item.slot}-${item.type.name}`}
+                    width="auto"
                   />
                 ))}
               </Box>
