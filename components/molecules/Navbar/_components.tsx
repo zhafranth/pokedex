@@ -12,6 +12,7 @@ export const Wrapper = styled(Container)`
   column-gap: 2.5rem;
   align-items: center;
   padding: 1rem 0;
+  margin-bottom: 2rem;
 `;
 
 export const Link = styled(NextLink)<LinkProperties>(({ active }) => ({
