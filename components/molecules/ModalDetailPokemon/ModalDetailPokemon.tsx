@@ -5,8 +5,10 @@ import { PokemonDetail } from "api/pokedex.interface";
 import { Container, Cover } from "./_components";
 import CloseIcon from "@mui/icons-material/Close";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 const Type = dynamic(() => import("@components/atoms/Type"));
+const Link = dynamic(() => import("@components/atoms/Button"));
 const Modal = dynamic(() => import("@mui/material/Modal"));
 const Button = dynamic(() => import("@mui/material/Button"));
 const Box = dynamic(() => import("@mui/material/Box"));
@@ -18,7 +20,8 @@ interface ModalDetailPokemonProperties extends Omit<ModalProps, "children"> {
 
 const ModalDetailPokemon: React.FC<ModalDetailPokemonProperties> = (props) => {
   const { data, open, onClose } = props;
-  const { name, sprites } = data;
+  const { name, sprites, weight, height, abilities, types, id } = data;
+  const router = useRouter();
 
   return (
     <Modal open={open} onClose={onClose}>
@@ -30,7 +33,7 @@ const ModalDetailPokemon: React.FC<ModalDetailPokemonProperties> = (props) => {
             <CloseIcon color="disabled" />
           </Button>
         </Box>
-        <Box display="flex" height="100%" columnGap="1rem">
+        <Box display="flex" height="100%" columnGap="1rem" position="relative">
           <Cover>
             <Image
               src={
@@ -58,13 +61,13 @@ const ModalDetailPokemon: React.FC<ModalDetailPokemonProperties> = (props) => {
                   <Text fontWeight="700" paragraph>
                     Weight :{" "}
                   </Text>
-                  <Text paragraph> 9999</Text>
+                  <Text paragraph>{weight}</Text>
                 </Box>
                 <Box display="flex" columnGap="0.7rem">
                   <Text fontWeight="700" paragraph>
                     Height :{" "}
                   </Text>
-                  <Text paragraph> 9999</Text>
+                  <Text paragraph>{height}</Text>
                 </Box>
               </Box>
               <Box display="flex" columnGap="0.7rem">
@@ -72,21 +75,33 @@ const ModalDetailPokemon: React.FC<ModalDetailPokemonProperties> = (props) => {
                   Abilities :{" "}
                 </Text>
                 <ul style={{ margin: "0" }}>
-                  <li>
-                    <Text paragraph>Abilities</Text>
-                  </li>
-                  <li>
-                    <Text paragraph>Abilities</Text>
-                  </li>
+                  {abilities?.map((item, index) => (
+                    <li key={`${item.ability.name}-${index}`}>
+                      <Text paragraph textTransform="capitalize">
+                        {item.ability.name}
+                      </Text>
+                    </li>
+                  ))}
                 </ul>
               </Box>
-              <Box display="flex" columnGap="0.7rem">
+              <Box display="flex" columnGap="0.7rem" flexWrap="wrap">
                 <Text fontWeight="700" paragraph>
                   Type :{" "}
                 </Text>
-                <Type value="normal" />
+                {types?.map((item) => (
+                  <Type
+                    value={item.type.name}
+                    key={`${item.slot}-${item.type.name}`}
+                  />
+                ))}
               </Box>
             </Box>
+            <Link
+              style={{ position: "absolute", bottom: "4rem" }}
+              onClick={() => router.push(`/${id}`)}
+            >
+              More Detail
+            </Link>
           </Box>
         </Box>
       </Container>

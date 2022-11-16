@@ -16,6 +16,12 @@ export interface TypeProperties {
   };
 }
 
+export interface AbilityProperties {
+  ability: { name: string; url: string };
+  is_hidden: boolean;
+  slot: number;
+}
+
 export interface PokemonListProperties {
   count: number;
   next: string | null;
@@ -30,4 +36,7 @@ export interface PokemonDetail {
     front_default: string;
   };
   types: TypeProperties[];
+  weight: number;
+  height: number;
+  abilities: AbilityProperties[];
 }
