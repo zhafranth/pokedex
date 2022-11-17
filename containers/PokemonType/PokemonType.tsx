@@ -5,7 +5,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Link from "next/link";
 import { usePokemonType } from "api/pokedex.hooks";
 import { useRouter } from "next/router";
-import { Colors } from "@constant/Color";
+import CircleOrnament from "./_components/CircleOrnament";
 
 const Box = dynamic(() => import("@mui/material/Box"));
 const CardPokemon = dynamic(() => import("./_components/CardPokemon"));
@@ -27,8 +27,11 @@ const PokemonType = () => {
     isFetching,
   } = usePokemonType(type as string);
   const { pokemon: pokemonList } = pokemonListType || {};
+
   return (
     <Container>
+      <CircleOrnament left="-25%" top="65rem" />
+      <CircleOrnament right="-25%" top="10rem" />
       <Stack
         divider={<Divider orientation="vertical" flexItem />}
         direction="row"

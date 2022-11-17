@@ -23,9 +23,11 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={theme}>
-        <TopNavbar />
-        <Navbar />
-        <Component {...pageProps} />
+        <div style={{ position: "relative", overflow: "hidden" }}>
+          <TopNavbar />
+          <Navbar />
+          <Component {...pageProps} />
+        </div>
       </ThemeProvider>
     </QueryClientProvider>
   );
