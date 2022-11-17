@@ -19,6 +19,7 @@ const EvolutionPokemon: React.FC<EvolutionPokemonProperties> = ({ data }) => {
   const { data: dataChain } = useEvolutionChain(evolution_chain?.url);
 
   const { chain } = dataChain || {};
+  console.log(chain);
   return (
     <SectionDetail title="Evolution">
       <Stack
@@ -36,15 +37,15 @@ const EvolutionPokemon: React.FC<EvolutionPokemonProperties> = ({ data }) => {
             color={EvolutionColor.first}
           />
         )}
-        {chain?.evolves_to.length !== 0 && (
+        {chain?.evolves_to?.length !== 0 && (
           <CardEvolution
             name={chain?.evolves_to[0]?.species?.name as string}
             color={EvolutionColor.second}
           />
         )}
-        {chain?.evolves_to[0].evolves_to.length !== 0 && (
+        {chain?.evolves_to[0]?.evolves_to?.length !== 0 && (
           <CardEvolution
-            name={chain?.evolves_to[0].evolves_to[0].species.name as string}
+            name={chain?.evolves_to[0]?.evolves_to[0]?.species?.name as string}
             color={EvolutionColor.third}
           />
         )}

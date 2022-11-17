@@ -31,6 +31,8 @@ const CardEvolution: React.FC<CardEvolutionProperties> = ({ name, color }) => {
   const router = useRouter();
   const { data } = useDetailPokemon(name);
   const { sprites } = data || {};
+
+  console.log(name);
   return (
     <Cover onClick={() => router.push(`/${name}`)} borderColor={color}>
       <Image
