@@ -47,7 +47,7 @@ export interface PokemonDetail {
   id: number;
   name: string;
   sprites: {
-    front_default: string;
+    [x: string]: string | null;
   };
   types: TypeProperties[];
   weight: number;

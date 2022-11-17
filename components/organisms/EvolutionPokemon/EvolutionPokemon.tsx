@@ -19,7 +19,7 @@ const EvolutionPokemon: React.FC<EvolutionPokemonProperties> = ({ data }) => {
   const { data: dataChain } = useEvolutionChain(evolution_chain?.url);
 
   const { chain } = dataChain || {};
-  console.log(chain);
+
   return (
     <SectionDetail title="Evolution">
       <Stack

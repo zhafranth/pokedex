@@ -2,7 +2,9 @@ import { useDetailPokemon, useSpeciesPokemon } from "api/pokedex.hooks";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import { StatsWrapper } from "./_components";
-import { StatsColor } from "constant/Color";
+import { Colors, StatsColor } from "constant/Color";
+import { useMemo } from "react";
+import Image from "next/image";
 
 const Container = dynamic(() => import("@mui/material/Container"));
 const Text = dynamic(() => import("@mui/material/Typography"));
@@ -22,11 +24,31 @@ const PokemonDetail = () => {
   );
   const { data: speciesPokemon } = useSpeciesPokemon(queryName as string);
 
-  const { stats } = detailPokemon || {};
+  const { stats, sprites } = detailPokemon || {};
+  const { other, versions, ...restSprites } = sprites || {};
+  const othersImages = useMemo(() => {
+    return Object.values(restSprites);
+  }, [sprites, restSprites]);
 
   return (
     <Container>
       <PokemonInfo data={detailPokemon} loading={isLoading} />
+      <SectionDetail title="Other Images">
+        {othersImages?.map((item, index) => {
+          if (item) {
+            return (
+              <Image
+                width={150}
+                height={150}
+                src={item}
+                alt={`others ${index}`}
+                key={`others-${index}`}
+                style={{ backgroundColor: Colors.grey }}
+              />
+            );
+          }
+        })}
+      </SectionDetail>
       <SectionDetail title="Stats">
         {stats?.map((item, index) => (
           <StatsWrapper
