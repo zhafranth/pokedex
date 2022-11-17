@@ -13,7 +13,7 @@ const SectionDetail: React.FC<SectionDetailProperties> = ({
   children,
 }) => {
   return (
-    <Box marginTop="5rem">
+    <Box marginTop="5rem" marginBottom="6rem">
       <Text fontSize="1.25rem" fontWeight="700">
         {title}
       </Text>

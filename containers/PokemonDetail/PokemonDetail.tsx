@@ -1,15 +1,17 @@
-import { useDetailPokemon } from "api/pokedex.hooks";
+import { useDetailPokemon, useSpeciesPokemon } from "api/pokedex.hooks";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import { StatsWrapper } from "./_components";
 import { StatsColor } from "constant/Color";
 
 const Container = dynamic(() => import("@mui/material/Container"));
-const Box = dynamic(() => import("@mui/material/Box"));
 const Text = dynamic(() => import("@mui/material/Typography"));
 const PokemonInfo = dynamic(() => import("@components/organisms/pokemonInfo"));
 const SectionDetail = dynamic(
   () => import("@components/molecules/SectionDetail")
+);
+const EvolutionPokemon = dynamic(
+  () => import("@components/organisms/EvolutionPokemon")
 );
 
 const PokemonDetail = () => {
@@ -18,10 +20,10 @@ const PokemonDetail = () => {
   const { data: detailPokemon, isLoading } = useDetailPokemon(
     queryName as string
   );
+  const { data: speciesPokemon } = useSpeciesPokemon(queryName as string);
 
   const { stats } = detailPokemon || {};
 
-  console.log(detailPokemon);
   return (
     <Container>
       <PokemonInfo data={detailPokemon} loading={isLoading} />
@@ -45,6 +47,7 @@ const PokemonDetail = () => {
           </StatsWrapper>
         ))}
       </SectionDetail>
+      <EvolutionPokemon data={speciesPokemon} />
     </Container>
   );
 };

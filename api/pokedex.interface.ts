@@ -55,3 +55,24 @@ export interface PokemonDetail {
   abilities: AbilityProperties[];
   stats: StatsProperties[];
 }
+
+export interface SpeciesProperties {
+  evolution_chain: {
+    url: string;
+  } | null;
+}
+
+export interface ChainProperties {
+  evolution_details: [];
+  evolves_to: ChainProperties[] | [];
+  is_baby: boolean;
+  species: {
+    name: string;
+    url: string;
+  };
+}
+
+export interface EvolutionChainProperties {
+  baby_trigger_item: string | number | null;
+  chain: ChainProperties;
+}

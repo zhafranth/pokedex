@@ -17,3 +17,9 @@ export const StatsColor = {
   "special-defense": "#512DA8",
   speed: "#FDD835",
 };
+
+export const EvolutionColor = {
+  first: "#FFEB3B",
+  second: "#FF9800",
+  third: "#FF5722",
+};
