@@ -76,3 +76,23 @@ export interface EvolutionChainProperties {
   baby_trigger_item: string | number | null;
   chain: ChainProperties;
 }
+
+export interface PokemonTypeListProperties {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: {
+    name: string;
+    url: string;
+  }[];
+}
+
+export interface PokemonTypeProperties {
+  pokemon: {
+    pokemon: {
+      name: string;
+      url: string;
+    };
+    slot: number;
+  }[];
+}
