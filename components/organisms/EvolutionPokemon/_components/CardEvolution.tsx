@@ -53,7 +53,7 @@ const CardEvolution: React.FC<CardEvolutionProperties> = ({ name, color }) => {
           bottom: "-5rem",
         }}
       >
-        {name.replace("-", " ")}
+        {name?.replace("-", " ") || "-"}
       </Text>
     </Cover>
   );
