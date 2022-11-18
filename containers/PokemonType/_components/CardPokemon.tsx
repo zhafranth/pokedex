@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Colors } from "@constant/Color";
 import { useDetailPokemon } from "api/pokedex.hooks";
 import { CoverDefault } from "@constant/Default";
+import { useRouter } from "next/router";
 
 const Box = dynamic(() => import("@mui/material/Box"));
 const Type = dynamic(() => import("components/atoms/Type"));
@@ -16,10 +17,11 @@ interface CardPokemonProperties {
 }
 
 const CardPokemon: React.FC<CardPokemonProperties> = ({ name }) => {
+  const router = useRouter();
   const { data } = useDetailPokemon(name);
   const { sprites, types, id } = data || {};
   return (
-    <Box>
+    <Box onClick={() => router.push(`/${name}`)} style={{ cursor: "pointer" }}>
       <Stack
         direction="row"
         divider={<Divider orientation="vertical" flexItem />}
