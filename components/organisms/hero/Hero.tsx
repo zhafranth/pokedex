@@ -13,7 +13,7 @@ const Hero: React.FC<HeroProperties> = ({ ref }) => {
   const gotToPokedex = () => {
     window.scrollTo({
       behavior: "smooth",
-      top: ref?.current?.offsetTop || 0 + 450,
+      top: ref?.current?.offsetTop || 0 + 900,
     });
   };
   return (

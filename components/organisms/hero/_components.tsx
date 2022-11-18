@@ -5,6 +5,7 @@ export const ContentWrapper = styled.div`
   align-items: center;
   justify-content: space-between;
   column-gap: 2rem;
+  margin-bottom: 8rem;
   .content {
     width: 45%;
   }
