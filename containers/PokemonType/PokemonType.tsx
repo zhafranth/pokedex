@@ -129,8 +129,8 @@ const PokemonType = () => {
           </Stack>
         </Box>
         <Box flex="1">
-          <Text fontSize="2.5rem" fontWeight="700">
-            Pokemon with Type 1
+          <Text fontSize="2.5rem" fontWeight="700" textTransform="capitalize">
+            Pokemon with type {type.toString().replace("-", " ")}
           </Text>
           <Paper
             elevation={10}
@@ -138,6 +138,7 @@ const PokemonType = () => {
               borderRadius: "1.5rem",
               marginTop: "2rem",
               padding: "1rem",
+              background: "rgba(255, 255, 255, 0.85)",
             }}
           >
             <Stack>
@@ -156,45 +157,47 @@ const PokemonType = () => {
                 />
               ))}
             </Stack>
-            <Stack
-              direction="row"
-              alignItems="center"
-              justifyContent="space-between"
-              margin="2rem 0"
-            >
-              <Box display="flex" alignItems="center" columnGap="1rem">
+            {pokemonList?.length !== 0 && (
+              <Stack
+                direction="row"
+                alignItems="center"
+                justifyContent="space-between"
+                margin="2rem 0"
+              >
+                <Box display="flex" alignItems="center" columnGap="1rem">
+                  <Text
+                    paragraph
+                    fontWeight="700"
+                    fontFamily="inherit"
+                    margin={0}
+                    color={SelectedType?.color}
+                  >
+                    Per Page :
+                  </Text>
+                  <Select defaultValue={limit} onChange={handleChangeLimit}>
+                    {limitOptions.map((item) => (
+                      <MenuItem value={item} key={`options-${item}`}>
+                        {item}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </Box>
+                <Pagination
+                  count={totalPage}
+                  onChange={handleChangePage}
+                  page={page}
+                />
                 <Text
                   paragraph
                   fontWeight="700"
                   fontFamily="inherit"
-                  margin={0}
+                  margin="0"
                   color={SelectedType?.color}
                 >
-                  Per Page :
+                  Total Data : {pokemonList?.length}
                 </Text>
-                <Select defaultValue={limit} onChange={handleChangeLimit}>
-                  {limitOptions.map((item) => (
-                    <MenuItem value={item} key={`options-${item}`}>
-                      {item}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </Box>
-              <Pagination
-                count={totalPage}
-                onChange={handleChangePage}
-                page={page}
-              />
-              <Text
-                paragraph
-                fontWeight="700"
-                fontFamily="inherit"
-                margin="0"
-                color={SelectedType?.color}
-              >
-                Total Data : {pokemonList?.length}
-              </Text>
-            </Stack>
+              </Stack>
+            )}
           </Paper>
         </Box>
       </Stack>
