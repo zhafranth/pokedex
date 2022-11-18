@@ -14,7 +14,7 @@ const Navbar = () => {
         Home
       </Link>
       <Link href="/pokemon-type" active={pathname === "/pokemon-type"}>
-        Type
+        Pokemon Type
       </Link>
     </Wrapper>
   );
