@@ -3,6 +3,7 @@ import Image from "next/image";
 import { PokemonDetail } from "api/pokedex.interface";
 import { useRouter } from "next/router";
 import { Cover } from "./_components";
+import { CoverDefault } from "@constant/Default";
 
 const Box = dynamic(() => import("@mui/material/Box"));
 const Text = dynamic(() => import("@mui/material/Typography"));
@@ -26,10 +27,7 @@ const PokemonInfo: React.FC<PokemonInfoProperties> = ({ data, loading }) => {
     <Box display="flex" columnGap="2rem" position="relative">
       <Cover>
         <Image
-          src={
-            sprites?.front_default ||
-            "https://pixelartmaker-data-78746291193.nyc3.digitaloceanspaces.com/image/2480187d8bd9102.png"
-          }
+          src={sprites?.front_default || CoverDefault}
           width="250"
           height="250"
           alt={name as string}

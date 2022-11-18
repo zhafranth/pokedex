@@ -8,6 +8,7 @@ import CircleOrnament from "./_components/CircleOrnament";
 import { useMemo, useState, useEffect } from "react";
 import { SelectChangeEvent } from "@mui/material/Select";
 import { TypeOptions } from "@components/atoms/Type/Type.enum";
+import { limitOptions } from "@constant/Default";
 
 const Box = dynamic(() => import("@mui/material/Box"));
 const CardPokemon = dynamic(() => import("./_components/CardPokemon"));
@@ -38,8 +39,6 @@ const PokemonType = () => {
   const SelectedType = useMemo(() => {
     return TypeOptions.find((item) => item.name === type);
   }, [type]);
-
-  const limitOptions = [6, 9, 12, 15];
 
   const list = useMemo(() => {
     const offset = page > 1 ? (page - 1) * limit : 0;

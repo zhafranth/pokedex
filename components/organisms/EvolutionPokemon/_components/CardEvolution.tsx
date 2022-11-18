@@ -5,6 +5,7 @@ import { useDetailPokemon } from "api/pokedex.hooks";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
+import { CoverDefault } from "@constant/Default";
 
 const Text = dynamic(() => import("@mui/material/Typography"));
 const Stack = dynamic(() => import("@mui/material/Stack"));
@@ -38,10 +39,7 @@ const CardEvolution: React.FC<CardEvolutionProperties> = ({ name, color }) => {
         width="120"
         height="120"
         alt={name}
-        src={
-          sprites?.front_default ||
-          "https://pixelartmaker-data-78746291193.nyc3.digitaloceanspaces.com/image/2480187d8bd9102.png"
-        }
+        src={sprites?.front_default || CoverDefault}
       />
       <Text
         position="absolute"

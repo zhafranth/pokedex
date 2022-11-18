@@ -5,6 +5,7 @@ import { PokemonDetail, ResultPokemonProperties } from "api/pokedex.interface";
 import { useDetailPokemon } from "api/pokedex.hooks";
 import Image from "next/image";
 import { useState } from "react";
+import { CoverDefault } from "@constant/Default";
 
 const Text = dynamic(() => import("@mui/material/Typography"));
 const Tag = dynamic(() => import("@components/atoms/Type"));
@@ -42,10 +43,7 @@ const CardPokedex: React.FC<CardPokedexProperties> = ({ data }) => {
       <WrapperCard onClick={toggleModal}>
         <Cover>
           <Image
-            src={
-              sprites?.front_default ||
-              "https://pixelartmaker-data-78746291193.nyc3.digitaloceanspaces.com/image/2480187d8bd9102.png"
-            }
+            src={sprites?.front_default || CoverDefault}
             alt={name}
             width="150"
             height="150"

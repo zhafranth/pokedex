@@ -6,6 +6,7 @@ import { useGetPokemonList } from "api/pokedex.hooks";
 import { useMemo, useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { SelectChangeEvent } from "@mui/material/Select";
+import { limitOptions } from "@constant/Default";
 
 const Container = dynamic(() => import("@mui/material/Container"));
 const Typography = dynamic(() => import("@mui/material/Typography"));
@@ -57,8 +58,6 @@ const PokedexList: React.FC<PokedexListProperties> = ({ ref }) => {
       return Math.ceil(count / limit);
     }
   }, [count, limit]);
-
-  const limitOptions = [6, 9, 12, 15];
 
   useEffect(() => {
     if (queryPage) {

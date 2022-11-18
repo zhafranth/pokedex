@@ -26,9 +26,10 @@ const PokemonDetail = () => {
 
   const { stats, sprites } = detailPokemon || {};
   const { other, versions, ...restSprites } = sprites || {};
+
   const othersImages = useMemo(() => {
     return Object.values(restSprites);
-  }, [sprites, restSprites]);
+  }, [restSprites]);
 
   return (
     <Container>

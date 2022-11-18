@@ -3,6 +3,7 @@ import dynamic from "next/dynamic";
 import Image from "next/image";
 import { Colors } from "@constant/Color";
 import { useDetailPokemon } from "api/pokedex.hooks";
+import { CoverDefault } from "@constant/Default";
 
 const Box = dynamic(() => import("@mui/material/Box"));
 const Type = dynamic(() => import("components/atoms/Type"));
@@ -27,10 +28,7 @@ const CardPokemon: React.FC<CardPokemonProperties> = ({ name }) => {
         padding="1.5rem 1rem"
       >
         <Image
-          src={
-            sprites?.front_default ||
-            "https://pixelartmaker-data-78746291193.nyc3.digitaloceanspaces.com/image/2480187d8bd9102.png"
-          }
+          src={sprites?.front_default || CoverDefault}
           alt="pokemon"
           width={100}
           height={100}
