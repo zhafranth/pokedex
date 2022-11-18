@@ -1,11 +1,13 @@
 import dynamic from "next/dynamic";
 import CircleIcon from "@mui/icons-material/Circle";
-import { usePokemonTypeList } from "api/pokedex.hooks";
+import { usePokemonTypeList, usePokemonType } from "api/pokedex.hooks";
 import CircularProgress from "@mui/material/CircularProgress";
 import Link from "next/link";
-import { usePokemonType } from "api/pokedex.hooks";
 import { useRouter } from "next/router";
 import CircleOrnament from "./_components/CircleOrnament";
+import { useMemo, useState, useEffect } from "react";
+import { SelectChangeEvent } from "@mui/material/Select";
+import { TypeOptions } from "@components/atoms/Type/Type.enum";
 
 const Box = dynamic(() => import("@mui/material/Box"));
 const CardPokemon = dynamic(() => import("./_components/CardPokemon"));
@@ -14,12 +16,17 @@ const Divider = dynamic(() => import("@mui/material/Divider"));
 const Text = dynamic(() => import("@mui/material/Typography"));
 const Paper = dynamic(() => import("@mui/material/Paper"));
 const Container = dynamic(() => import("@mui/material/Container"));
+const Select = dynamic(() => import("@mui/material/Select"));
+const MenuItem = dynamic(() => import("@mui/material/MenuItem"));
+const Pagination = dynamic(() => import("@mui/material/Pagination"));
 
 const PokemonType = () => {
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(6);
   const { data, isLoading } = usePokemonTypeList();
   const { results: typeList } = data || {};
   const router = useRouter();
-  const { type = "normal" } = router.query;
+  const { type = "normal", page: queryPage, limit: queryLimit } = router.query;
 
   const {
     data: pokemonListType,
@@ -28,10 +35,71 @@ const PokemonType = () => {
   } = usePokemonType(type as string);
   const { pokemon: pokemonList } = pokemonListType || {};
 
+  const SelectedType = useMemo(() => {
+    return TypeOptions.find((item) => item.name === type);
+  }, [type]);
+
+  const limitOptions = [6, 9, 12, 15];
+
+  const list = useMemo(() => {
+    const offset = page > 1 ? (page - 1) * limit : 0;
+    if (pokemonList) {
+      if (limit < 0) return pokemonList.slice(offset);
+      return pokemonList.slice(offset, offset + limit);
+    }
+  }, [limit, pokemonList, page]);
+
+  const handleChangeLimit = (event: SelectChangeEvent<unknown>) => {
+    const { value } = event.target;
+    setLimit(value as number);
+    router.push(
+      { query: { ...router.query, limit: value as number } },
+      undefined,
+      {
+        scroll: false,
+      }
+    );
+  };
+
+  const handleChangePage = (
+    event: React.ChangeEvent<unknown>,
+    page: number
+  ) => {
+    event.preventDefault();
+    setPage(page);
+    router.push({ query: { ...router.query, page } }, undefined, {
+      scroll: false,
+    });
+  };
+
+  const totalPage = useMemo(() => {
+    const total = pokemonList?.length;
+    if (total) {
+      return Math.ceil(total / limit);
+    }
+  }, [pokemonList, limit]);
+
+  useEffect(() => {
+    if (queryPage) {
+      setPage(+queryPage);
+    }
+    if (queryLimit) {
+      setLimit(+queryLimit);
+    }
+  }, [queryPage, queryLimit]);
+
   return (
-    <Container>
-      <CircleOrnament left="-25%" top="65rem" />
-      <CircleOrnament right="-25%" top="10rem" />
+    <Container style={{ marginBottom: "5rem" }}>
+      <CircleOrnament
+        left="-25%"
+        top="65rem"
+        color={SelectedType?.color as string}
+      />
+      <CircleOrnament
+        right="-25%"
+        top="10rem"
+        color={SelectedType?.color as string}
+      />
       <Stack
         divider={<Divider orientation="vertical" flexItem />}
         direction="row"
@@ -81,12 +149,51 @@ const PokemonType = () => {
                   Empty pokemon
                 </Text>
               )}
-              {pokemonList?.map((item, index) => (
+              {list?.map((item, index) => (
                 <CardPokemon
                   name={item.pokemon.name}
                   key={`card-pokemon-${index}`}
                 />
               ))}
+            </Stack>
+            <Stack
+              direction="row"
+              alignItems="center"
+              justifyContent="space-between"
+              margin="2rem 0"
+            >
+              <Box display="flex" alignItems="center" columnGap="1rem">
+                <Text
+                  paragraph
+                  fontWeight="700"
+                  fontFamily="inherit"
+                  margin={0}
+                  color={SelectedType?.color}
+                >
+                  Per Page :
+                </Text>
+                <Select defaultValue={limit} onChange={handleChangeLimit}>
+                  {limitOptions.map((item) => (
+                    <MenuItem value={item} key={`options-${item}`}>
+                      {item}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </Box>
+              <Pagination
+                count={totalPage}
+                onChange={handleChangePage}
+                page={page}
+              />
+              <Text
+                paragraph
+                fontWeight="700"
+                fontFamily="inherit"
+                margin="0"
+                color={SelectedType?.color}
+              >
+                Total Data : {pokemonList?.length}
+              </Text>
             </Stack>
           </Paper>
         </Box>

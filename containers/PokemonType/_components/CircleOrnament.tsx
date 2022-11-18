@@ -1,14 +1,11 @@
-import { useMemo } from "react";
 import styled from "@emotion/styled";
-import { TypeOptions } from "@components/atoms/Type/Type.enum";
-import { useRouter } from "next/router";
 
 interface CircleOrnamentProperties {
   top?: string;
   bottom?: string;
   right?: string;
   left?: string;
-  color?: string;
+  color: string;
 }
 
 const Circle = styled.div<CircleOrnamentProperties>`
@@ -24,12 +21,7 @@ const Circle = styled.div<CircleOrnamentProperties>`
   z-index:-1;
 `;
 const CircleOrnament: React.FC<CircleOrnamentProperties> = (props) => {
-  const router = useRouter();
-  const { type = "normal" } = router.query;
-  const SelectedType = useMemo(() => {
-    return TypeOptions.find((item) => item.name === type);
-  }, [type]);
-  return <Circle {...props} color={SelectedType?.color as string} />;
+  return <Circle {...props} />;
 };
 
 export default CircleOrnament;

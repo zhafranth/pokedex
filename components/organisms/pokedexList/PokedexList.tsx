@@ -56,7 +56,7 @@ const PokedexList: React.FC<PokedexListProperties> = ({ ref }) => {
     if (count) {
       return Math.ceil(count / limit);
     }
-  }, [data, count, limit]);
+  }, [count, limit]);
 
   const limitOptions = [6, 9, 12, 15];
 
